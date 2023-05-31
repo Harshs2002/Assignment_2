@@ -1,0 +1,33 @@
+def count_pairs_with_sum(arr, target_sum):
+    count = 0
+    num_freq = {}
+
+    for num in arr:
+        if num in num_freq:
+            num_freq[num] += 1
+        else:
+            num_freq[num] = 1
+
+    for num in arr:
+        complement = target_sum - num
+        if complement in num_freq:
+            count += num_freq[complement]
+
+        if complement == num:
+            count -= 1
+
+    count //= 2
+
+    return count
+
+
+arr = [1, 5, 7, -1, 5]
+target_sum = 6
+
+pair_count = count_pairs_with_sum(arr, target_sum)
+print(f"Number of pairs with sum {target_sum}: {pair_count}")
+
+
+# output
+
+Number of pairs with sum 6: 3
