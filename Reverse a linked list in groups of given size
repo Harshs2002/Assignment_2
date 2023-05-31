@@ -1,0 +1,58 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+def reverse_linked_list_in_groups(head, k):
+    current = head
+    next_node = None
+    prev = None
+    count = 0
+
+    while current is not None and count < k:
+        next_node = current.next
+        current.next = prev
+        prev = current
+        current = next_node
+        count += 1
+
+    if next_node is not None:
+        head.next = reverse_linked_list_in_groups(next_node, k)
+
+    return prev 
+
+
+def print_linked_list(head):
+    current = head
+    while current:
+        print(current.data, end=" -> ")
+        current = current.next
+    print("None")
+
+
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+head.next.next.next = Node(4)
+head.next.next.next.next = Node(5)
+head.next.next.next.next.next = Node(6)
+head.next.next.next.next.next.next = Node(7)
+head.next.next.next.next.next.next.next = Node(8)
+
+print("Original Linked List:")
+print_linked_list(head)
+
+k = 3  
+
+head = reverse_linked_list_in_groups(head, k)
+
+print(f"Linked List after reversing in groups of {k}:")
+print_linked_list(head)
+
+
+# output
+Original Linked List:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> None
+Linked List after reversing in groups of 3:
+3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 8 -> 7 -> None
