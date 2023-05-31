@@ -1,0 +1,19 @@
+def find_duplicates(arr):
+    duplicates = set()
+    seen = set()
+
+    for num in arr:
+        if num in seen:
+            duplicates.add(num)
+        else:
+            seen.add(num)
+
+    return duplicates
+
+
+array = [1, 2, 3, 4, 5, 2, 7, 4, 1, 9, 5]
+duplicate_nums = find_duplicates(array)
+print("Duplicate elements in the array:", duplicate_nums)
+
+# output
+Duplicate elements in the array: {1, 2, 4, 5}
